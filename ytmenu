@@ -1,0 +1,11 @@
+#!/bin/zsh
+inputStr=$(zenity --entry --title="YouTube" --text="Enter A Query")
+konsole -e ytfzf -t -T sixel --url-handler-opts="--input-ipc-server=/tmp/mpvsocket --geometry=1280x720+10+-10" --sort --loop --async-thumbnails $inputStr
+#if zenity --entry \
+#--title="YouTube Search" \
+#--text="Feeling Lucky?" \
+#--entry-text "NewProfile"
+#  then print
+  #then 'ytfzf -t -T sixel --url-handler-opts="--input-ipc-server=/tmp/mpvsocket --geometry=1280x720+10+-10" -a' $?
+  #else echo "No name entered"
+#fi

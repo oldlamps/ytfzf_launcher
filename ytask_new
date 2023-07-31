@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Display the Yad dialog and capture user input and radio button selection
+form_data=$(yad --form --title="User Input" --text="YouTube Search" \
+        --field="Feeling Luck?" "" \
+        --field="Random?:CB" "No!Yes")
+
+# Extract the values from the form_data string
+user_input=$(echo "$form_data" | awk -F '|' '{print $1}')
+random_selection=$(echo "$form_data" | awk -F '|' '{print $2}')
+
+# Output the values
+if [ "$random_selection" == "Yes" ]; then
+    echo "$user_input"
+    ytfzf -t -T sixel --url-handler-opts="--input-ipc-server=/tmp/mpvsocket --geometry=1280x720+10+-10" --notify-playing -r "$user_input"
+else
+    ytfzf -t -T sixel --url-handler-opts="--input-ipc-server=/tmp/mpvsocket --geometry=1280x720+10+-10" --notify-playing -a "$user_input"
+fi
